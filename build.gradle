@@ -17,12 +17,12 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 
 
 
-version = "1.5.1"
+version = "1.5.2.1"
 group = "com.zendarva.islandsinthesky" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "islandsinthesky"
 
 minecraft {
-    version = "1.12-14.21.1.2387"
+    version = "1.12-14.21.1.2404"
     runDir = "eclipse"
     mappings = "snapshot_20170702"
 }

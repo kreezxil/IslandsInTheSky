@@ -16,7 +16,7 @@ public class IslandCapability
   BlockPos islandLoc;
   BlockPos islandCorner;
   boolean isOwner = false;
-
+  boolean abandoning = false;
 
   public EntityPlayer getInvitedBy()
   {
@@ -74,6 +74,16 @@ public class IslandCapability
       (entityPos.getZ() <= pos.getZ() + ConfigurationHolder.islandSize) && (entityPos.getZ() >= pos.getZ()))
       return true;
     return false;
+  }
+
+  @Override
+  public void setAbandoning(boolean value) {
+    abandoning=value;
+  }
+
+  @Override
+  public boolean isAbandoning() {
+    return abandoning;
   }
 }
 

@@ -1,70 +1,67 @@
-/*     */ package com.gmail.zendarva.islands.command;
-/*     */ 
-/*     */ import com.gmail.zendarva.islands.ConfigurationHolder;
-/*     */ import com.gmail.zendarva.islands.IslandData;
-/*     */ import com.gmail.zendarva.islands.Islands;
-/*     */ import com.gmail.zendarva.islands.capabilities.IslandCapability;
-/*     */ import com.gmail.zendarva.islands.generation.SkyIslandBiomeProvider;
-/*     */ import com.gmail.zendarva.islands.handlers.IslandCapabilityProvider;
-/*     */ import java.util.ArrayList;
-/*     */ import java.util.List;
-/*     */ import net.minecraft.command.CommandBase;
-/*     */ import net.minecraft.command.CommandException;
-/*     */ import net.minecraft.command.ICommandSender;
-/*     */ import net.minecraft.entity.player.EntityPlayer;
-/*     */ import net.minecraft.entity.player.InventoryPlayer;
-/*     */ import net.minecraft.item.ItemStack;
-/*     */ import net.minecraft.server.MinecraftServer;
-/*     */ import net.minecraft.util.math.BlockPos;
-/*     */ import net.minecraft.util.math.Vec3i;
-/*     */ import net.minecraft.util.text.TextComponentString;
-/*     */ import net.minecraft.world.World;
-/*     */ 
-/*     */ public class IslandCommand
-/*     */   extends CommandBase
-/*     */ {
-/*     */   private ArrayList<String> aliases;
-/*     */   
-/*     */   public IslandCommand()
-/*     */   {
-/*  30 */     this.aliases = new ArrayList();
-/*  31 */     this.aliases.add("is");
-/*     */   }
-/*     */   
-/*     */   public boolean checkPermission(MinecraftServer server, ICommandSender sender)
-/*     */   {
-/*  36 */     return true;
-/*     */   }
-/*     */   
-/*     */   public List getAliases()
-/*     */   {
-/*  41 */     return this.aliases;
-/*     */   }
-/*     */   
-/*     */   public String getName()
-/*     */   {
-/*  46 */     return "island";
-/*     */   }
-/*     */   
-/*     */   public String getUsage(ICommandSender p_71518_1_)
-/*     */   {
-/*  51 */     return "/island will return you to your island. Creating it if necessary.";
-/*     */   }
-/*     */   
-/*     */   public void execute(MinecraftServer server, ICommandSender sender, String[] args)
-/*     */     throws CommandException
-/*     */   {
-/*  57 */     if (!(sender instanceof EntityPlayer))
-/*     */     {
-/*     */ 
-/*  60 */       return;
-/*     */     }
-/*  62 */     EntityPlayer player = (EntityPlayer)sender;
-/*     */     
-/*     */ 
-/*  65 */     if (sender.getEntityWorld().isRemote) {
-/*  66 */       return;
-/*     */     }
+ package com.gmail.zendarva.islands.command;
+
+ import com.gmail.zendarva.islands.ConfigurationHolder;
+ import com.gmail.zendarva.islands.IslandData;
+ import com.gmail.zendarva.islands.Islands;
+ import com.gmail.zendarva.islands.capabilities.IslandCapability;
+ import com.gmail.zendarva.islands.generation.SkyIslandBiomeProvider;
+ import com.gmail.zendarva.islands.handlers.IslandCapabilityProvider;
+ import java.util.ArrayList;
+ import java.util.List;
+ import net.minecraft.command.CommandBase;
+ import net.minecraft.command.CommandException;
+ import net.minecraft.command.ICommandSender;
+ import net.minecraft.entity.player.EntityPlayer;
+ import net.minecraft.entity.player.InventoryPlayer;
+ import net.minecraft.item.ItemStack;
+ import net.minecraft.server.MinecraftServer;
+ import net.minecraft.util.math.BlockPos;
+ import net.minecraft.util.math.Vec3i;
+ import net.minecraft.util.text.TextComponentString;
+ import net.minecraft.world.World;
+ public class IslandCommand
+   extends CommandBase
+ {
+   private ArrayList<String> aliases;
+
+   public IslandCommand()
+   {
+     this.aliases = new ArrayList();
+     this.aliases.add("is");
+   }
+
+   public boolean checkPermission(MinecraftServer server, ICommandSender sender)
+   {
+     return true;
+   }
+
+   public List getAliases()
+   {
+     return this.aliases;
+   }
+
+   public String getName()
+   {
+     return "island";
+   }
+
+   public String getUsage(ICommandSender p_71518_1_)
+   {
+     return "/island will return you to your island. Creating it if necessary.";
+   }
+
+   public void execute(MinecraftServer server, ICommandSender sender, String[] args)
+     throws CommandException
+   {
+     if (!(sender instanceof EntityPlayer))
+     {
+       return;
+     }
+     EntityPlayer player = (EntityPlayer)sender;
+
+     if (sender.getEntityWorld().isRemote) {
+       return;
+     }
     if (player.dimension != 0)
     {
 
@@ -119,5 +116,3 @@
     return false;
   }
 }
-
-

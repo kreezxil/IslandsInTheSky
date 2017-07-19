@@ -7,17 +7,11 @@ package com.gmail.zendarva.islands;
 
 import com.gmail.zendarva.islands.ConfigurationHolder;
 import com.gmail.zendarva.islands.IslandData;
-import com.gmail.zendarva.islands.command.AcceptCommand;
-import com.gmail.zendarva.islands.command.InviteCommand;
-import com.gmail.zendarva.islands.command.IslandCommand;
-import com.gmail.zendarva.islands.command.SetIslandCommand;
-import com.gmail.zendarva.islands.command.SpawnCommand;
+import com.gmail.zendarva.islands.command.*;
 import com.gmail.zendarva.islands.generation.SkyIslandWorldProvider;
 import com.gmail.zendarva.islands.generation.SkyIslandWorldType;
 import com.gmail.zendarva.islands.generation.SkyNetherWorldProvider;
-import com.gmail.zendarva.islands.handlers.CapabilityHandler;
-import com.gmail.zendarva.islands.handlers.ProtectionHandler;
-import com.gmail.zendarva.islands.handlers.WorldDataHandler;
+import com.gmail.zendarva.islands.handlers.*;
 import com.gmail.zendarva.islands.proxy.CommonProxy;
 import net.minecraft.command.ServerCommandManager;
 import net.minecraft.server.MinecraftServer;
@@ -26,6 +20,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.WorldType;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.world.WorldEvent.Load;
@@ -47,8 +42,10 @@ public class Islands {
     public static final String MODID = "islandsinthesky";
     public static final String VERSION = "2.0";
     public static IslandData worldData;
-    static WorldType type = new SkyIslandWorldType();
+    public static WorldType type = new SkyIslandWorldType();
     public static Logger logger;
+    @Mod.Instance
+    public static Islands instance;
     @SidedProxy(
             clientSide = "com.gmail.zendarva.islands.proxy.ClientProxy",
             serverSide = "com.gmail.zendarva.islands.proxy.CommonProxy"
@@ -95,6 +92,7 @@ public class Islands {
         MinecraftForge.EVENT_BUS.register(handler);
         CapabilityHandler cHandler = new CapabilityHandler();
         MinecraftForge.EVENT_BUS.register(cHandler);
+        MinecraftForge.EVENT_BUS.register(new DeleteHandler());
         Configuration config = new Configuration(event.getSuggestedConfigurationFile());
         config.load();
         ConfigurationHolder.getInstance().setupConfigs(config);
@@ -109,12 +107,13 @@ public class Islands {
     @EventHandler
     public void serverStart(FMLServerStartingEvent event) {
         MinecraftServer server = event.getServer();
-        ((ServerCommandManager)((ServerCommandManager)server.getCommandManager())).registerCommand(new IslandCommand());
-        ((ServerCommandManager)((ServerCommandManager)server.getCommandManager())).registerCommand(new SetIslandCommand());
-        ((ServerCommandManager)((ServerCommandManager)server.getCommandManager())).registerCommand(new InviteCommand());
-        ((ServerCommandManager)((ServerCommandManager)server.getCommandManager())).registerCommand(new AcceptCommand());
+        ((ServerCommandManager) server.getCommandManager()).registerCommand(new IslandCommand());
+        ((ServerCommandManager) server.getCommandManager()).registerCommand(new SetIslandCommand());
+        ((ServerCommandManager) server.getCommandManager()).registerCommand(new InviteCommand());
+        ((ServerCommandManager) server.getCommandManager()).registerCommand(new AcceptCommand());
+        ((ServerCommandManager) server.getCommandManager()).registerCommand(new AbandonCommand());
         if(!server.getCommandManager().getCommands().containsKey("spawn")) {
-            ((ServerCommandManager)((ServerCommandManager)server.getCommandManager())).registerCommand(new SpawnCommand());
+            ((ServerCommandManager) server.getCommandManager()).registerCommand(new SpawnCommand());
         }
 
     }

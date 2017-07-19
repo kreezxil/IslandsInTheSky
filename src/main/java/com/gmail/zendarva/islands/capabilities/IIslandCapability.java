@@ -24,6 +24,10 @@ public abstract interface IIslandCapability
   public abstract void set(IIslandCapability paramIIslandCapability);
   
   public abstract boolean isOnIsland(EntityPlayer paramEntityPlayer);
+
+  public abstract void setAbandoning(boolean value);
+
+  public abstract boolean isAbandoning();
 }
 
 
