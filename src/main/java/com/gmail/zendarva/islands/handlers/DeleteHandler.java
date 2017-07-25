@@ -8,6 +8,8 @@ import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
+import java.util.LinkedList;
+
 /**
  * Created by James on 7/15/2017.
  */
@@ -22,7 +24,11 @@ public class DeleteHandler {
             return;
 
         if (event.phase == TickEvent.Phase.END) {
-            if (Islands.worldData == null || Islands.worldData.toDelete.isEmpty())
+            if (Islands.worldData == null)
+                return;
+            if (Islands.worldData.toDelete == null)
+                Islands.worldData.toDelete= new LinkedList<>();
+            if (Islands.worldData.toDelete.isEmpty())
                 return;
             DeleteTarget target = Islands.worldData.toDelete.get(0);
 
@@ -46,3 +52,7 @@ public class DeleteHandler {
 
     }
 }
+
+
+
+

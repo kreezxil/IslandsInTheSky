@@ -6,6 +6,8 @@ import net.minecraftforge.event.terraingen.WorldTypeEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.util.LinkedList;
+
 
 public class WorldDataHandler
 {
@@ -30,11 +32,18 @@ public class WorldDataHandler
       com.gmail.zendarva.islands.Islands.worldData = data;
       return;
     }
+    data.toDelete = new LinkedList<>();
     com.gmail.zendarva.islands.Islands.worldData = data;
   }
 
   @SubscribeEvent
   public void onWorldLoad(WorldTypeEvent event) {}
 }
+
+
+
+
+
+
 
 
