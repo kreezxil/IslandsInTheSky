@@ -1,0 +1,26 @@
+modLoader="javafml" #mandatory
+loaderVersion="[30,)" #mandatory (28 is current forge version)
+issueTrackerURL="https://github.com/kreezxil/skybases/issues/" #optional
+[[mods]] #mandatory
+modId="skybases" #mandatory
+version="${file.jarVersion}" #mandatory
+displayName="Sky Bases" #mandatory
+logoFile="skybases.png" #optional
+credits="Thank you Zen Darva for making IslandsInTheSky then abandoning Minecraft altogether! :(" #optional
+authors="Kreezxil" #optional
+description='''
+Everthing that IslandsInTheSky is but for
+1.14.4 and 1.15.1
+'''
+[[dependencies.examplemod]] #optional
+    modId="forge" #mandatory
+    mandatory=true #mandatory
+    versionRange="[30,)" #mandatory
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.examplemod]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.15.1]"
+    ordering="NONE"
+    side="BOTH"
